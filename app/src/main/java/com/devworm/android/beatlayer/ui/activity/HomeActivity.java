@@ -1,9 +1,11 @@
-package com.devworm.android.beatlayer;
+package com.devworm.android.beatlayer.ui.activity;
 
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import com.devworm.android.beatlayer.R;
 
 
 public class HomeActivity extends ActionBarActivity {
