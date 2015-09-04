@@ -7,10 +7,5 @@ import android.os.IBinder;
 /**
  * Created by Saver on 2015-09-02.
  */
-public class PlayService extends Service {
-
-    @Override
-    public IBinder onBind(Intent intent) {
-        return null;
-    }
+public class PlayService{
 }

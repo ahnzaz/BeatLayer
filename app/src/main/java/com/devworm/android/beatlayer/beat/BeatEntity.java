@@ -7,6 +7,4 @@ package com.devworm.android.beatlayer.beat;
  * Created by Saver on 2015-09-02.
  */
 public interface BeatEntity {
-
-    public void getName();
 }

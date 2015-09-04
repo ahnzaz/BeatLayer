@@ -9,6 +9,6 @@ public interface NetworkRequestHandler {
 
     public void onConnected(InputStream stream);
 
-    public void onConnectFailed();
+    public void onConnectFailed(Throwable t);
 
 }
