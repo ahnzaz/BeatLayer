@@ -9,4 +9,5 @@ public interface StorageReadHandler {
     public void onRead(String source, byte[] data);
     public void onRead(String source, InputStream stream);
     public void onRead(String source, int offset, int length, byte[] data);
+    public void onExceptionOccurred(String source, Throwable exception);
 }
