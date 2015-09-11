@@ -15,17 +15,18 @@ public class Log {
     public static final int ASSERT  = 1<<5;
     public static final int FATAL   = 1<<6;
 
-    private static long logSeq;
+    private static long staticSequence = 1;
     private final Map<String, String> tag;
     private final String task;
     private final Class<?> creator;
-    private final int sequence;
+    private final int ownSequence;
     private int operationSeq;
 
     private final StringBuilder builder;
 
     {
         this.builder = new StringBuilder();
+        this.ownSequence = staticSequence++;
     }
 
     public static final Log newInstance(){
@@ -42,5 +43,24 @@ public class Log {
         return this;
     }
 
+    public Log addComma(String value) {
+        if (this.builder.length() > 0) {
+            this.builder.append(',');
+        }
+        this.builder.append(value);
+        return this;
+    }
 
+    public Log addParenthesis(String value){
+        this.builder.append('(').append(value).append(')');
+        return this;
+    }
+
+    public Log addBracket(String value){
+        return this;
+    }
+
+    public Log addSquareBracker(String value){
+        return this;
+    }
 }
