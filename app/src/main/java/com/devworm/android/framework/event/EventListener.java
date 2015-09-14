@@ -1,4 +1,4 @@
-package com.devworm.android.beatlayer.event;
+package com.devworm.android.framework.event;
 
 /**
  * Eventlistener interface. <br />

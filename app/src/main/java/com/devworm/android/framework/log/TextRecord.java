@@ -1,4 +1,4 @@
-package com.devworm.android.beatlayer.log;
+package com.devworm.android.framework.log;
 
 import java.util.Map;
 

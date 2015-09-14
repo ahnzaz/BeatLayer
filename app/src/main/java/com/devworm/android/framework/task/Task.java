@@ -1,4 +1,4 @@
-package com.devworm.android.beatlayer.task;
+package com.devworm.android.framework.task;
 
 /**
  * Interface of all delegable running task. <br />

@@ -1,6 +1,6 @@
 package com.devworm.android.beatlayer.module;
 
-import com.devworm.android.beatlayer.log.Tracker;
+import com.devworm.android.framework.log.Tracker;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
