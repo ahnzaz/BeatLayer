@@ -9,7 +9,7 @@ import java.lang.reflect.Method;
  * @modified 2015-09-11
  * @since 1.0
  */
-public abstract class Operation<E, A, R> {
+public abstract class Operation<E, A, R>{
 
     public static final int SUCCESS = 0;
     public static final int FAILURE = 1;
@@ -28,7 +28,7 @@ public abstract class Operation<E, A, R> {
      * @return
      * @since 1.0
      */
-    public int execute(E e, Method method, A... params) {
+    public int executeAsync(E e, Method method, A... params) {
 
         // NULL check
         if (e == null) {
@@ -46,7 +46,7 @@ public abstract class Operation<E, A, R> {
                 try {
                     if (params[i] != null && !parameterTypes[i].isInstance(params[i])) {
                         // Argument type does not matched.
-                        return this.onException(new IllegalArgumentException("Argument at " + i + " poision is not instance of " + parameterTypes[i].getName()));
+                        return this.onException(new IllegalArgumentException("Type of argument at " + i + " position is not equal to " + parameterTypes[i].getName()));
                     }
                 } catch (ArrayIndexOutOfBoundsException aibe) {
                     return this.onException(new IllegalArgumentException("Given arguments count does not matched."));
@@ -89,15 +89,31 @@ public abstract class Operation<E, A, R> {
         return SUCCESS;
     }
 
-    public void execute(E e, String method, A... args) {
+    public int executeAsync(E e, String method, A... args) {
+        return UNKNOWN;
+    }
+
+    public int executeAsync(Class<? extends E> e, Method method, A... args) {
+        return UNKNOWN;
+    }
+
+    public int executeAsync(Class<? extends E> e, String method, A... args) {
+        return UNKNOWN;
+    }
+
+    public R executeSync(Class<? extends E> e, Method method, A... args){
 
     }
 
-    public void execute(Class<? extends E> e, Method method, A... args) {
+    public R executeSync(Class<? extends E> e, String method, A... args){
 
     }
 
-    public void execute(Class<? extends E> e, String method, A... args) {
+    public R executeSync(E executor, Method method, A... args){
+
+    }
+
+    public R executeSync(E executor, String method, A... args) {
 
     }
 
@@ -105,19 +121,11 @@ public abstract class Operation<E, A, R> {
         return UNKNOWN;
     }
 
-    protected void handleResult(Tracker tracker, R result) {
+    protected abstract void handleResult(Tracker tracker, R result);
 
-    }
+    protected abstract void handleException(Tracker tracker, Throwable t);
 
-    protected void handleException(Tracker tracker, Throwable t) {
+    protected abstract void handleResultOnUI(Tracker tracker, R result);
 
-    }
-
-    protected void handleResultOnUI(Tracker tracker, R result) {
-
-    }
-
-    protected void handleExceptionOnUI(Tracker tracker, R result) {
-
-    }
+    protected abstract void handleExceptionOnUI(Tracker tracker, R result);
 }
