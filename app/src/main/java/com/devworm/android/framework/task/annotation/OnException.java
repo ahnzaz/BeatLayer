@@ -6,12 +6,12 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * Flag for method must be running on UI thread or not. <br />
+ * Exception handler method definition. <br />
  * @since 1.0
- * @created 2015-09-14
+ * @created 2015-09-15
  */
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface ExecuteOnUI {
-    boolean value() default true;
+public @interface OnException {
+    Class<? extends Throwable>[] value() default {Throwable.class};
 }

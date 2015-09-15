@@ -6,5 +6,5 @@ package com.devworm.android.framework.task;
  * @created 2015-09-14
  */
 public interface TaskExecutor {
-    clearTasks();
+    void clearTasks();
 }
