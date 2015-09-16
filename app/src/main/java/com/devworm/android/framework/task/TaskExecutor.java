@@ -5,6 +5,10 @@ package com.devworm.android.framework.task;
  * @since 1.0
  * @created 2015-09-14
  */
-public interface TaskExecutor {
-    void clearTasks();
+public class TaskExecutor {
+    private TaskExecutor(){
+
+    }
+
+    private final static TaskExecutor instance;
 }
