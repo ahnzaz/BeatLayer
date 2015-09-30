@@ -1,4 +1,6 @@
-package com.devworm.android.framework.log;
+package com.devworm.android.framework.operation;
+
+import com.devworm.android.framework.log.Tracker;
 
 import java.lang.reflect.Method;
 
@@ -9,7 +11,7 @@ import java.lang.reflect.Method;
  * @modified 2015-09-11
  * @since 1.0
  */
-public abstract class Operation<E, A, R>{
+public abstract class AbstractOperation<E, A, R> {
 
     public static final int SUCCESS = 0;
     public static final int FAILURE = 1;
@@ -17,7 +19,7 @@ public abstract class Operation<E, A, R>{
     public static final int UNKNOWN = 1 << 2;
     private final Tracker tracker;
 
-    public Operation(Tracker tracker) {
+    public AbstractOperation(Tracker tracker) {
         this.tracker = tracker;
     }
 
@@ -84,48 +86,41 @@ public abstract class Operation<E, A, R>{
         return UNKNOWN;
     }
 
-    private final int onResult(R rawResult) {
-        this.handleResult(this.tracker, rawResult);
-        return SUCCESS;
-    }
-
     public int executeAsync(E e, String method, A... args) {
         return UNKNOWN;
     }
 
-    public int executeAsync(Class<? extends E> e, Method method, A... args) {
+    public int executeAsync(Class<E> e, Method method, A... args) {
         return UNKNOWN;
     }
 
-    public int executeAsync(Class<? extends E> e, String method, A... args) {
+    public int executeAsync(Class<E> e, String method, A... args) {
         return UNKNOWN;
     }
 
-    public R executeSync(Class<? extends E> e, Method method, A... args){
+    public final R executeSync(Class<E> e, Method method, A... args) {
 
     }
 
-    public R executeSync(Class<? extends E> e, String method, A... args){
+    public final R executeSync(Class<E> e, String method, A... args) {
 
     }
 
-    public R executeSync(E executor, Method method, A... args){
+    public final R executeSync(E executor, Method method, A... args) {
 
     }
 
-    public R executeSync(E executor, String method, A... args) {
+    public final R executeSync(E executor, String method, A... args) {
 
     }
 
-    private final int onException(Throwable t) {
-        return UNKNOWN;
+    private final void onResult(R result){
+
+    }
+    private final void onException(Throwable t) {
     }
 
-    protected abstract void handleResult(Tracker tracker, R result);
+    protected abstract void handleResult(R result);
 
-    protected abstract void handleException(Tracker tracker, Throwable t);
-
-    protected abstract void handleResultOnUI(Tracker tracker, R result);
-
-    protected abstract void handleExceptionOnUI(Tracker tracker, R result);
+    protected abstract void handleException(Throwable t);
 }

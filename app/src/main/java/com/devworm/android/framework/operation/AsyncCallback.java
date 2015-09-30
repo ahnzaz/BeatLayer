@@ -1,4 +1,4 @@
-package com.devworm.android.framework.log;
+package com.devworm.android.framework.operation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -6,10 +6,9 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * Created by SDS on 2015-09-14.
+ * Callback instance identifier. <br />
  */
-@Target(ElementType.METHOD)
+@Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface AsyncOperation {
-    boolean value() default true;
+public @interface AsyncCallback {
 }

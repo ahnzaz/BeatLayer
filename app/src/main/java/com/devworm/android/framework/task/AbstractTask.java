@@ -2,17 +2,27 @@ package com.devworm.android.framework.task;
 
 import com.devworm.android.framework.log.Tracker;
 
+import java.security.Timestamp;
+
 /**
  * Created by SDS on 2015-09-15.
  */
 public abstract class AbstractTask<E, A, R> implements Task<E, A, R> {
 
+    public static final int SUCCESS = 0;
+    public static final int FAILURE = 1;
+    public static final int PENDING = 1<<1;
+    public static final int UNKNOWN = 1<<2;
     protected final String taskName;
     protected final Tracker taskTracker;
+    
+    protected static long taskSequence;
+    protected Timestamp startTime;
+    protected Timestamp endTime;
 
-    protected Abstract(String taskName){
+    protected AbstractTask(String taskName){
         this.taskName = taskName;
-        this.taskTraker = Tracker.newInstance(taskName);
+        this.taskTracker = Tracker.newInstance(taskName);
     }
 
     @Override
@@ -30,16 +40,6 @@ public abstract class AbstractTask<E, A, R> implements Task<E, A, R> {
 
     }
 
-    protected AbstractTask(String taskName, Tracker taskTracker){
-        this.taskName = taskName;
-        this.taskTracker = taskTracker;
-    }
-
-    public static final int SUCCESS = 0;
-    public static final int FAILURE = 1;
-    public static final int PENDING = 1<<1;
-    public static final int UNKNOWN = 1<<2;
-
     @Override
     public R executeSync(E executor, A... args) throws Throwable {
         R taskResult = null;
@@ -48,7 +48,7 @@ public abstract class AbstractTask<E, A, R> implements Task<E, A, R> {
         // Run a task
         Throwable caughtException = null;
         try{
-            taskResult = this.onTask(e, args);
+            taskResult = this.onProgress(e, args);
         } catch(Throwable t){
             caughtException = t;
             // Logging exception.
@@ -71,15 +71,19 @@ public abstract class AbstractTask<E, A, R> implements Task<E, A, R> {
 
     }
 
-    @Override
-    public void onResult(R result) {
+    private void onResult(R result){
+        // Logging result.
 
+        // Handle result.
     }
 
-    @Override
-    public void onException(Throwable t) {
+    private void onException(Exception e){
+        // Logging exception
 
+        // Handle exception.
     }
 
-    protected abstract R onTask(E executor, A... args);
+    abstract protected int handleResult(R result);
+    abstract protected void handleException(Exception e);
+    abstract protected R doTask(E executor, A... args);
 }

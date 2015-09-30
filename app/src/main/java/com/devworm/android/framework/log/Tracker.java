@@ -7,6 +7,15 @@ import java.lang.reflect.Method;
  */
 public class Tracker {
 
+    private final String taskName;
+    public Tracker(String taskName) {
+        this.taskName = taskName;
+    }
+
+    public static Tracker newInstance(String taskName){
+        return new Tracker(taskName);
+    }
+
     public static final int SUCCESS = 0;
     public static final int FAILURE = 1;
     public static final int PENDING = 1 << 1;
